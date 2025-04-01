@@ -9,8 +9,12 @@ class Loss(object):
 
 class Module(object):
     def __init__(self):
-        self._parameters = None
-        self._gradient = None
+        self._parameters = {"w": None, "b": None}
+        self._gradient = {"w": None, "b": None}
+        self._input = None
+
+    def __str__(self):
+        return f'Weight: {self._parameters["w"]}\nBias: {self._parameters["b"]}'
 
     def zero_grad(self):
         ## Annule gradient
@@ -20,11 +24,12 @@ class Module(object):
         ## Calcule la passe forward
         pass
 
-    def update_parameters(self, gradient_step=1e-3):
+    def update_parameters(self, gradient_step=1e-5):
         ## Calcule la mise a jour des parametres selon le gradient calcule et le pas de gradient_step
-        self._parameters -= gradient_step*self._gradient
+        self._parameters["w"] -= gradient_step*self._gradient["w"]
+        self._parameters["b"] -= gradient_step*self._gradient["b"]
 
-    def backward_update_gradient(self, input, delta):
+    def backward_update_gradient(self, delta):
         ## Met a jour la valeur du gradient
         pass
 
