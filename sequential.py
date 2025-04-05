@@ -22,11 +22,13 @@ class Sequential(object):
     
     def backward(self,delta):#the delta its the result of the loss_fun.backward
         seq = self.seq.copy()
+        delta_t = delta
         for s in seq[1:][::-1]: #we want the inverse way because we are doing it backwards
-            delta_t = s.backward_update_gradient(delta)
-            delta = s.backward_delta(delta_t)
+            s.backward_update_gradient(delta_t)
+            delta_t = s.backward_delta(delta_t)
+
         #this is the last/fist module
-        s.backward_update_gradient(delta)
+        s.backward_update_gradient(delta_t)
 
 
     def update_parameters(self):
