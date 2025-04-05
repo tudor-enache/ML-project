@@ -8,17 +8,19 @@ class Loss(object):
         pass
 
 class Module(object):
-    def __init__(self):
-        self._parameters = {"w": None, "b": None}
+    def __init__(self, input_dim, output_dim):
+        self._parameters = {"w": np.random.randn(input_dim, output_dim),
+                            "b": np.zeros((1, output_dim))}
         self._gradient = {"w": None, "b": None}
         self._input = None
+        self._output = None
 
     def __str__(self):
         return f'Weight: {self._parameters["w"]}\nBias: {self._parameters["b"]}'
 
     def zero_grad(self):
-        ## Annule gradient
-        pass
+        self._gradient["w"] = np.zeros_like(self._parameters["w"])
+        self._gradient["b"] = np.zeros_like(self._parameters["b"])
 
     def forward(self, X):
         ## Calcule la passe forward

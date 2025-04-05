@@ -23,16 +23,12 @@ class Linear(Module):
         self._gradient = {"w": None, "b": None}
         self._input = None
 
-    def zero_grad(self):
-        self._gradient["w"] = np.zeros_like(self._parameters["w"])
-        self._gradient["b"] = np.zeros_like(self._parameters["b"])
-
     def forward(self, x):
         self._input = x
         return x @ self._parameters["w"] + self._parameters["b"]
     
     def backward_update_gradient(self, delta):
-        # ADD SOME NORMALIZATION
+        # learns faster without normalization
         x = self._input
         self._gradient["w"] += x.T @ delta
         self._gradient["b"] += np.sum(delta, axis=0, keepdims=True)
