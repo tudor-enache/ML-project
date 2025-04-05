@@ -8,7 +8,7 @@ from linear import *
 # choose a number of points uniformly in the range [0, 50]
 a = 3
 b = 10
-x = np.random.uniform(0, 20, (1000000, 1))
+x = np.random.uniform(0, 20, (1000, 1))#1000000
 y = a * x + b + np.random.normal(size=x.shape)
 print(x.shape)
 print(y.shape)
@@ -42,23 +42,30 @@ y_hat = M.forward(x)
 print(M)
 
 import matplotlib.pyplot as plt
-plt.scatter(x, y, color="r", label="True data")
-plt.plot(x, y_hat, color="b", label="Predicted data")
-plt.legend()
-plt.title("Regression")
+
+figure, axis = plt.subplots(2, 2)
+
+axis[0, 0].scatter(x, y, color="r", label="True data")
+axis[0, 0].plot(x, y_hat, color="b", label="Predicted data")
+axis[0, 0].set_title("Regression")
+
+
+axis[0, 1].scatter(np.arange(len(x_batches)), weights)
+axis[0, 1].set_title("Weights")
+
+
+axis[1, 0].scatter(np.arange(len(x_batches)), biases)
+axis[1, 0].set_title("Biases")
+
+
+axis[1, 1].scatter(np.arange(len(x_batches)), losses)
+axis[1, 1].set_title("Loss")
+
+plt.tight_layout()
 plt.show()
 
-plt.scatter(np.arange(len(x_batches)), weights)
-plt.title("Weights")
-plt.show()
 
-plt.scatter(np.arange(len(x_batches)), biases)
-plt.title("Biases")
-plt.show()
 
-plt.scatter(np.arange(len(x_batches)), losses)
-plt.title("Loss")
-plt.show()
 
 # Problems noticed:
 # 1. If we keep increasing the range of the training data the weights don't adapt fast enough

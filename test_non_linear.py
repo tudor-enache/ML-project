@@ -8,8 +8,6 @@ n_samples=500
 x = np.random.randn(n_samples, 2)
 y = (x[:, 0] * x[:, 1] > 0).astype(int).reshape(-1, 1)
 
-plt.scatter(x[:, 0], x[:, 1], c=y, cmap="bwr", edgecolors="k")
-plt.show()
 
 L1 = Linear(2, 4)
 T = TanH(4, 4)
@@ -54,6 +52,26 @@ for epoch in range(num_epochs):
         L1.update_parameters()
 
 y_hat = S.forward(L2.forward(T.forward(L1.forward(x))))
+print(y_hat)
 
-plt.scatter(np.arange(num_epochs * len(x_batches)), losses)
+figure, axis = plt.subplots(1, 3)
+axis[0].scatter(x[:, 0], x[:, 1], c=y, cmap="bwr", edgecolors="k")
+axis[0].set_title("Data")
+
+axis[1].scatter(np.arange(num_epochs * len(x_batches)), losses, s = 5)
+axis[1].set_title("Losses")
+
+
+losses_array = np.array(losses)
+losses_array = losses_array.reshape(num_epochs,len(x_batches))
+mean_losses = np.mean(losses_array,axis = 0)
+
+#I want for each betch the average loss
+#axis[2].scatter(np.arange(num_epochs), mean_losses)
+#axis[2].set_title("Mean Losses")
+
+axis[2].scatter(np.arange(len(x_batches)), losses[-len(x_batches):])
+axis[2].set_title("last Losses")
+
+plt.tight_layout()
 plt.show()
