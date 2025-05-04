@@ -28,10 +28,10 @@ class Optim(object):
     
     def SGD(self,net2,x,y,batch_nb,num_epochs):
 
-        #TODO: chnage is so the batches are selected randomly
+        #TODO: chnage it so the batches are selected randomly
         x_batches = x.reshape(x.shape[0] // batch_nb, batch_nb, x.shape[1])
-        y_batches = y.reshape(y.shape[0] // batch_nb, batch_nb, y.shape[1])
-
+        y_batches = y.reshape(y.shape[0] // batch_nb, batch_nb)#, y.shape[1])
+        print(x_batches[0].shape)
         opt = Optim(net2,self.loss_fn,self.eps)
 
         for epoch in range(num_epochs):
