@@ -1,4 +1,5 @@
 import numpy as np
+import math
 from projet_etu import Loss, Module
 
 # throughout this document let's keep the following notation for the input and output dimensions of any module
@@ -25,6 +26,7 @@ class Linear(Module):
 
     def forward(self, x):
         self._input = x
+        if math.isnan(self._parameters["w"][0][0]) : exit()
         return x @ self._parameters["w"] + self._parameters["b"]
     
     def backward_update_gradient(self, delta):

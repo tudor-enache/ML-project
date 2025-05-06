@@ -27,8 +27,6 @@ for epoch in range(num_epochs):
         # calculate loss at this step
         y_hat = seq.forward(x_batch)
 
-        losses.append(L.forward(y_batch, y_hat))
-
         seq.zero_grad()
 
         delta = L.backward(y_batch, y_hat)

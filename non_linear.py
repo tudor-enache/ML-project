@@ -46,7 +46,7 @@ class Sigmoide(Module):
         return delta
 
     def backward_delta(self, delta):
-        return self._input * (1 - self._input) * delta
+        return self._output * (1 - self._output) * delta
     
     def name():
         return "Sigmoide"

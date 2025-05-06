@@ -17,6 +17,14 @@ def get_train_data():
 
     return X_train,Y_train,9 #batch number
 
+def labels_to_one_hot(Y):
+    one_hot = []
+    for y in Y :
+        h = np.zeros(10)
+        h[y] = 1
+        one_hot.append(h)
+    return np.array(one_hot)
+
 def get_test_data():
     data = pkl.load(open("usps.pkl",'rb')) 
     X_test = np.array(data["X_test"],dtype=float)

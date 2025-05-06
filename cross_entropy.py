@@ -10,7 +10,7 @@ class CELoss(Loss):
         # y: batch x 1{s.name for s in seq}
         # yhat: batch x 1
         # output: 1
-        return - y*yhat - np.log(np.sum(np.exp(yhat)))
+        return  - y*yhat + np.log(np.sum(np.exp(yhat)))
     
     def backward(self, y, yhat):
         # output: batch x 1
