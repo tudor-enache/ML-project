@@ -17,7 +17,7 @@ print(X_train.shape)
 #show_digit(f"Image de : {Y_train[0]} et prediction",X_train[0])
 
 L = CELoss()
-seq = Sequential([Linear(X_train.shape[1], n),TanH(n, n),Linear(n, 10),Sigmoide(10, 10)])
+seq = Sequential([Linear(256, 128),TanH(128, 128),Linear(128, 64),TanH(64,64),Linear(64,10)])
 print("Sequential is defined")
 opt = Optim(seq,L,10e-3)
 print("Optim is also defined")

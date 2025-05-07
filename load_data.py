@@ -7,7 +7,10 @@ def get_train_data():
     data = pkl.load(open("usps.pkl",'rb')) 
 
     X_train = np.array(data["X_train"],dtype=float)
-    
+    maxi = np.max(X_train)
+    mini = np.min(X_train)
+
+    X_train = (X_train - mini)/(maxi- mini)
 
     Y_train = data["Y_train"]
     
